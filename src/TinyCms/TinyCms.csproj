@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TinyCms.BusinessLayer\TinyCms.BusinessLayer.csproj" />
+    <ProjectReference Include="..\TinyCms.BusinessLayer\TinyCms.BusinessLayer.csproj" />
   </ItemGroup>
 
 </Project>
