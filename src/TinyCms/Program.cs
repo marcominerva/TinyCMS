@@ -1,7 +1,14 @@
+using TinyCms.DataAccessLayer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddSqlContext(options =>
+{
+    options.ConnectionString = builder.Configuration.GetConnectionString("SqlConnection");
+});
 
 var app = builder.Build();
 

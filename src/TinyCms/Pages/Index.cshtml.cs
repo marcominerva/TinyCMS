@@ -1,18 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TinyCms.DataAccessLayer;
 
 namespace TinyCms.Pages;
+
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ISqlContext sqlContext;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(ISqlContext sqlContext)
     {
-        _logger = logger;
+        this.sqlContext = sqlContext;
     }
 
-    public void OnGet()
+    public async Task OnGetAsync(string url)
     {
-
+        var contentPages = await sqlContext.GetSingleValueAsync<int>("SELECT COUNT(*) FROM ContentPages");
+        Debug.WriteLine(contentPages);
     }
 }
