@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TinyCms.Database", "src\TinyCms.Database\TinyCms.Database.sqlproj", "{3CDFF753-FC54-44C8-8698-BDE1C86FFCC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,12 @@ Global
 		{981D86AA-4E2F-44BD-A06A-B7E386593712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{981D86AA-4E2F-44BD-A06A-B7E386593712}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{981D86AA-4E2F-44BD-A06A-B7E386593712}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDFF753-FC54-44C8-8698-BDE1C86FFCC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CDFF753-FC54-44C8-8698-BDE1C86FFCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CDFF753-FC54-44C8-8698-BDE1C86FFCC7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3CDFF753-FC54-44C8-8698-BDE1C86FFCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CDFF753-FC54-44C8-8698-BDE1C86FFCC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDFF753-FC54-44C8-8698-BDE1C86FFCC7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
