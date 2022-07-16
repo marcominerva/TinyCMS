@@ -92,6 +92,12 @@ internal class SqlContext : ISqlContext
     public Task<int> ExecuteAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
        => Connection.ExecuteAsync(sql, param, transaction, commandType: commandType);
 
+    public async ValueTask<IDbTransaction> BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.Unspecified, CancellationToken cancellationToken = default)
+    {
+        var transaction = await (Connection as SqlConnection).BeginTransactionAsync(isolationLevel, cancellationToken);
+        return transaction;
+    }
+
     protected virtual void Dispose(bool disposing)
     {
         if (!disposedValue)
