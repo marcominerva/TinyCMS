@@ -50,5 +50,5 @@ public interface ISqlContext : IDisposable
 
     Task<int> ExecuteAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null);
 
-    ValueTask<IDbTransaction> BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.Unspecified, CancellationToken cancellationToken = default);
+    IDbTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified);
 }
