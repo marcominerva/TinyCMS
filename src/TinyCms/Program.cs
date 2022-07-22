@@ -1,3 +1,5 @@
+using TinyCms.BusinessLayer.Services;
+using TinyCms.BusinessLayer.Services.Interfaces;
 using TinyCms.DataAccessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ builder.Services.AddSqlContext(options =>
 {
     options.ConnectionString = builder.Configuration.GetConnectionString("SqlConnection");
 });
+
+builder.Services.AddScoped<IPageService, PageService>();
 
 var app = builder.Build();
 

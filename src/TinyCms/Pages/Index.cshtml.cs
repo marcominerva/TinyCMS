@@ -1,21 +1,21 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TinyCms.DataAccessLayer;
+using TinyCms.BusinessLayer.Services.Interfaces;
 
 namespace TinyCms.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly ISqlContext sqlContext;
+    private readonly IPageService pageService;
 
-    public IndexModel(ISqlContext sqlContext)
+    public IndexModel(IPageService pageService)
     {
-        this.sqlContext = sqlContext;
+        this.pageService = pageService;
     }
 
     public async Task OnGetAsync(string url)
     {
-        var contentPages = await sqlContext.GetSingleValueAsync<int>("SELECT COUNT(*) FROM ContentPages");
-        Debug.WriteLine(contentPages);
+        var contentPage = await pageService.GetAsync(url);
+        Debug.WriteLine(contentPage.Title);
     }
 }

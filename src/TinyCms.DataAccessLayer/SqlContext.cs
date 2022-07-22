@@ -1,6 +1,8 @@
 ﻿using System.Data;
+using System.Reflection;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using TinyCms.Shared.Models;
 
 namespace TinyCms.DataAccessLayer;
 
@@ -20,6 +22,24 @@ internal class SqlContext : ISqlContext
 
             return connection;
         }
+    }
+
+    static SqlContext()
+    {
+        var columnMaps = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
+        {
+            // Column => Property,
+            ["SiteId"] = "Id",
+            ["SiteTitle"] = "Title"
+        };
+
+        var mapper = new Func<Type, string, PropertyInfo>((type, columnName) =>
+            columnMaps.ContainsKey(columnName) ? type.GetProperty(columnMaps[columnName]) :
+            type.GetProperty(columnName)
+        );
+
+        SqlMapper.SetTypeMap(typeof(Site), new CustomPropertyTypeMap(typeof(Site), (type, columnName) =>
+            mapper(type, columnName)));
     }
 
     public SqlContext(SqlContextOptions options)
