@@ -25,7 +25,7 @@ public interface ISqlContext : IDisposable
         where TFourth : class
         where TReturn : class;
 
-    Task<T> GetObjectAsync<T>(string query, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
+    Task<T> GetObjectAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         where T : class;
 
     Task<TReturn> GetObjectAsync<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, IDbTransaction transaction = null, CommandType? commandType = null, string splitOn = "Id")
