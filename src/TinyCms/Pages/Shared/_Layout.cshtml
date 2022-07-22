@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TinyCms</title>
+    <title>@ViewData["Title"] - @ViewData["SiteTitle"]</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
@@ -14,6 +14,8 @@
     <environment exclude="Development">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    @await RenderSectionAsync("Head", required: false)
 </head>
 <body>
     <header>
@@ -42,7 +44,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - TinyCMS
+            &copy; @DateTime.UtcNow.Year - @ViewData["SiteTitle"]
         </div>
     </footer>
 

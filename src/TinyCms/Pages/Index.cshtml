@@ -2,10 +2,8 @@
 
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = Model.ContentPage.Title;
+    ViewData["SiteTitle"] = Model.ContentPage.Site.Title;    
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@Html.Raw(Model.ContentPage.Content)
