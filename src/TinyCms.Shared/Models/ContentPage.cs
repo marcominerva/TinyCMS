@@ -12,10 +12,3 @@ public class ContentPage
 
     public Site Site { get; set; }
 }
-
-public class Site
-{
-    public Guid Id { get; set; }
-
-    public string Title { get; set; }
-}
