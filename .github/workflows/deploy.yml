@@ -1,0 +1,50 @@
+name: Deploy on Azure
+
+on:
+  push:
+    branches: [ master ]
+    paths: [ 'src/**' ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: tinycms
+  AZURE_WEBAPP_PACKAGE_PATH: './published'
+  NET_VERSION: '6.x'
+  PROJECT_NAME: src/TinyCms
+  DATABASE_PROJECT_FILE: src/TinyCms.Database/TinyCms.Database.sqlproj
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET SDK ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+    
+    - name: Install dependencies
+      run: dotnet restore ${{ env.PROJECT_NAME }}
+      
+    - name: Build
+      run: dotnet build ${{ env.PROJECT_NAME }} --configuration Release --no-restore
+      
+    - name: Publish
+      run: dotnet publish ${{ env.PROJECT_NAME }} --no-build --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      
+    - name: Publish Database
+      uses: azure/sql-action@master
+      with:        
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        project-file: ${{ env.DATABASE_PROJECT_FILE }}
+        arguments: '/p:BlockOnPossibleDataLoss=false'
+       
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

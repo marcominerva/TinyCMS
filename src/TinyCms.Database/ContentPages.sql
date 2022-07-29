@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ContentPages] (
+CREATE TABLE [dbo].[ContentPages] (
     [Id]                   UNIQUEIDENTIFIER CONSTRAINT [DF_ContentPages_Id] DEFAULT (newid()) NOT NULL,
     [SiteId]               UNIQUEIDENTIFIER NOT NULL,
     [Title]                NVARCHAR (256)   NOT NULL,
