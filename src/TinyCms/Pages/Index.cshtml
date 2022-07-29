@@ -1,0 +1,9 @@
+﻿@page "{url?}"
+
+@model IndexModel
+@{
+    ViewData["Title"] = Model.ContentPage.Title;
+    ViewData["SiteTitle"] = Model.ContentPage.Site.Title;    
+}
+
+<raw>@Model.ContentPage.Content</raw>

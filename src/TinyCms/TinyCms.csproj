@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="HtmlSanitizer" Version="7.1.542" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TinyCms.BusinessLayer\TinyCms.BusinessLayer.csproj" />
+  </ItemGroup>
+
+</Project>

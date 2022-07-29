@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @ViewData["SiteTitle"]</title>
+
+    <link type="image/png" sizes="16x16" rel="icon" href="~//favicon-16.png">
+    <link type="image/png" sizes="32x32" rel="icon" href="~/favicon-32.png">
+    <link type="image/png" sizes="96x96" rel="icon" href="~/favicon-96.png">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" asp-append-version="true" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+    @await RenderSectionAsync("Head", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" href="/">@ViewData["SiteTitle"]</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.UtcNow.Year - @ViewData["SiteTitle"]
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+
+    <environment include="Development">
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
