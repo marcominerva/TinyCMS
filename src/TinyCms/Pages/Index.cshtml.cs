@@ -27,7 +27,7 @@ public class IndexModel : PageModel
 
         if (!ContentPage.IsPublished)
         {
-            return Forbid();
+            return StatusCode(StatusCodes.Status403Forbidden);
         }
 
         return Page();

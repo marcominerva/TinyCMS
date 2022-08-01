@@ -6,10 +6,17 @@ namespace TinyCms.TagHelpers;
 [HtmlTargetElement("raw")]
 public class RawContentTagHelper : TagHelper
 {
+    public bool Sanitize { get; set; } = true;
+
     public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
     {
-        var html = (await output.GetChildContentAsync(NullHtmlEncoder.Default)).GetContent(NullHtmlEncoder.Default);
-        html = HtmlExtensions.Sanitize(html);
+        var childContent = await output.GetChildContentAsync(NullHtmlEncoder.Default);
+        var html = childContent.GetContent(NullHtmlEncoder.Default);
+
+        if (Sanitize)
+        {
+            html = HtmlExtensions.Sanitize(html);
+        }
 
         output.TagName = null;
         output.Content.SetHtmlContent(html);
