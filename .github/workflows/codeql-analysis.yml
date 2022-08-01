@@ -5,7 +5,7 @@ on:
     branches-ignore: [ master ]
     paths: [ 'src/**' ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, develop]
     paths: [ 'src/**' ]
   workflow_dispatch:
   
