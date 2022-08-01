@@ -45,9 +45,9 @@ jobs:
           LINTER_RULES_PATH: '.'
           EDITORCONFIG_FILE_NAME: '.editorconfig'
           VALIDATE_ALL_CODEBASE: false
-          #VALIDATE_CSHARP: true
-          #VALIDATE_HTML: true
-          #VALIDATE_JAVASCRIPT_STANDARD: true
-          #VALIDATE_SQL: true
+          VALIDATE_CSHARP: true
+          VALIDATE_HTML: true
+          VALIDATE_JAVASCRIPT_STANDARD: true
+          VALIDATE_SQL: true
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
