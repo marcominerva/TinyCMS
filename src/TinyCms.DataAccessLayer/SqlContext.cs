@@ -50,7 +50,7 @@ internal class SqlContext : ISqlContext
     public Task<IEnumerable<T>> GetDataAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         where T : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.QueryAsync<T>(sql, param, transaction, commandType: commandType);
     }
@@ -60,7 +60,7 @@ internal class SqlContext : ISqlContext
         where TSecond : class
         where TReturn : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType);
     }
@@ -71,7 +71,7 @@ internal class SqlContext : ISqlContext
         where TThrid : class
         where TReturn : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType);
     }
@@ -83,7 +83,7 @@ internal class SqlContext : ISqlContext
         where TFourth : class
         where TReturn : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType);
     }
@@ -91,7 +91,7 @@ internal class SqlContext : ISqlContext
     public Task<T> GetObjectAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
         where T : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.QueryFirstOrDefaultAsync<T>(sql, param, transaction, commandType: commandType);
     }
@@ -101,7 +101,7 @@ internal class SqlContext : ISqlContext
         where TSecond : class
         where TReturn : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         var result = await Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType).ConfigureAwait(false);
         return result.FirstOrDefault();
@@ -113,7 +113,7 @@ internal class SqlContext : ISqlContext
         where TThird : class
         where TReturn : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         var result = await Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType).ConfigureAwait(false);
         return result.FirstOrDefault();
@@ -126,7 +126,7 @@ internal class SqlContext : ISqlContext
         where TFourth : class
         where TReturn : class
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         var result = await Connection.QueryAsync(sql, map, param, transaction, splitOn: splitOn, commandType: commandType).ConfigureAwait(false);
         return result.FirstOrDefault();
@@ -134,21 +134,21 @@ internal class SqlContext : ISqlContext
 
     public Task<T> GetSingleValueAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.ExecuteScalarAsync<T>(sql, param, transaction, commandType: commandType);
     }
 
     public Task<int> ExecuteAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.ExecuteAsync(sql, param, transaction, commandType: commandType);
     }
 
     public IDbTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
     {
-        ThrowIfDisposable();
+        ThrowIfDisposed();
 
         return Connection.BeginTransaction(isolationLevel);
     }
@@ -178,7 +178,7 @@ internal class SqlContext : ISqlContext
         GC.SuppressFinalize(this);
     }
 
-    private void ThrowIfDisposable()
+    private void ThrowIfDisposed()
     {
         if (disposedValue)
         {
