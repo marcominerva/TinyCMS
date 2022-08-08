@@ -1,5 +1,5 @@
 # TinyCMS
-[![GitHub Super-Linter](https://github.com/marcominerva/TinyCMS/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![Lint Code Base](https://github.com/marcominerva/TinyCMS/actions/workflows/linter.yml/badge.svg)](https://github.com/marcominerva/TinyCMS/actions/workflows/linter.yml)
 [![CodeQL](https://github.com/marcominerva/TinyCMS/actions/workflows/codeql.yml/badge.svg)](https://github.com/marcominerva/TinyCMS/actions/workflows/codeql.yml)
 [![Deploy on Azure](https://github.com/marcominerva/TinyCMS/actions/workflows/deploy.yml/badge.svg)](https://github.com/marcominerva/TinyCMS/actions/workflows/deploy.yml)
 
