@@ -1,7 +1,9 @@
 # TinyCMS
+
 [![Lint Code Base](https://github.com/marcominerva/TinyCMS/actions/workflows/linter.yml/badge.svg)](https://github.com/marcominerva/TinyCMS/actions/workflows/linter.yml)
 [![CodeQL](https://github.com/marcominerva/TinyCMS/actions/workflows/codeql.yml/badge.svg)](https://github.com/marcominerva/TinyCMS/actions/workflows/codeql.yml)
 [![Deploy on Azure](https://github.com/marcominerva/TinyCMS/actions/workflows/deploy.yml/badge.svg)](https://github.com/marcominerva/TinyCMS/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/marcominerva/TinyCMS/blob/master/LICENSE)
 
 The smallest CMS engine ever, made with [ASP.NET Core](https://github.com/dotnet/aspnetcore) and [Dapper](https://github.com/DapperLib/Dapper). Currently, only static content is supported, but adding new pages is as simple as inserting a new row in a database table with the raw HTML content of the page.
 
