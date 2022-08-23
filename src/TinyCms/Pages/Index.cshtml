@@ -6,4 +6,20 @@
     ViewData["SiteTitle"] = Model.ContentPage.Site.Title;    
 }
 
+@section Head
+{
+    
+    @foreach (var styleSheet in Model.ContentPage.GetAllStyleSheetUrls)
+    {
+        <link rel="stylesheet" href="@styleSheet" />
+    }
+
+    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.GetAllStyleSheetContent))
+    {
+        <style type="text/css">
+            @Model.ContentPage.GetAllStyleSheetContent
+        </style>
+    }
+}
+
 <raw>@Model.ContentPage.Content</raw>
