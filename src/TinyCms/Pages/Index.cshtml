@@ -8,16 +8,33 @@
 
 @section Head
 {
-    
-    @foreach (var styleSheet in Model.ContentPage.GetAllStyleSheetUrls)
+    @if (Model.ContentPage.StyleSheetUrls is not null)
     {
-        <link rel="stylesheet" href="@styleSheet" />
+        @foreach (var styleSheet in Model.ContentPage.StyleSheetUrls)
+        {
+            <link rel="stylesheet" href="@styleSheet" />
+        }
     }
 
-    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.GetAllStyleSheetContent))
+    @if (Model.ContentPage.Site.StyleSheetUrls is not null)
+    {
+        @foreach (var styleSheet in Model.ContentPage.Site.StyleSheetUrls)
+        {
+            <link rel="stylesheet" href="@styleSheet" />
+        }
+    }
+
+    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.StyleSheetContent))
     {
         <style type="text/css">
-            @Model.ContentPage.GetAllStyleSheetContent
+            @Model.ContentPage.StyleSheetContent
+        </style>
+    }
+
+    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.Site.StyleSheetContent))
+    {
+        <style type="text/css">
+            @Model.ContentPage.Site.StyleSheetContent
         </style>
     }
 }

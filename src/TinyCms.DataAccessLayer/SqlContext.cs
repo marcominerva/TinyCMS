@@ -42,6 +42,8 @@ internal class SqlContext : ISqlContext
 
         SqlMapper.SetTypeMap(typeof(Site), new CustomPropertyTypeMap(typeof(Site), (type, columnName) =>
             mapper(type, columnName)));
+
+        SqlMapper.AddTypeHandler(new StringListTypeHandler());
     }
 
     public SqlContext(SqlContextOptions options)
