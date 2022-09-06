@@ -2,6 +2,7 @@
 using System.Reflection;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using TinyCms.DataAccessLayer.TypeHandlers;
 using TinyCms.Shared.Models;
 
 namespace TinyCms.DataAccessLayer;
@@ -43,7 +44,7 @@ internal class SqlContext : ISqlContext
         SqlMapper.SetTypeMap(typeof(Site), new CustomPropertyTypeMap(typeof(Site), (type, columnName) =>
             mapper(type, columnName)));
 
-        SqlMapper.AddTypeHandler(new StringListTypeHandler());
+        SqlMapper.AddTypeHandler(new StringArrayTypeHandler());
     }
 
     public SqlContext(SqlContextOptions options)

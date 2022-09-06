@@ -12,7 +12,7 @@
     {
         @foreach (var styleSheet in Model.ContentPage.StyleSheetUrls)
         {
-            <link rel="stylesheet" href="@styleSheet" />
+            <link rel="stylesheet" href="@styleSheet" asp-append-version="true" />
         }
     }
 
@@ -20,22 +20,18 @@
     {
         @foreach (var styleSheet in Model.ContentPage.Site.StyleSheetUrls)
         {
-            <link rel="stylesheet" href="@styleSheet" />
+            <link rel="stylesheet" href="@styleSheet" asp-append-version="true" />
         }
     }
 
     @if(!string.IsNullOrWhiteSpace(Model.ContentPage.StyleSheetContent))
     {
-        <style type="text/css">
-            @Model.ContentPage.StyleSheetContent
-        </style>
+        <raw><style type="text/css">@Model.ContentPage.StyleSheetContent</style></raw>
     }
 
     @if(!string.IsNullOrWhiteSpace(Model.ContentPage.Site.StyleSheetContent))
     {
-        <style type="text/css">
-            @Model.ContentPage.Site.StyleSheetContent
-        </style>
+        <raw><style type="text/css">@Model.ContentPage.Site.StyleSheetContent</style></raw>
     }
 }
 
