@@ -3,10 +3,11 @@ using Dapper;
 
 namespace TinyCms.DataAccessLayer.TypeHandlers;
 
-public class StringArrayTypeHandler : SqlMapper.TypeHandler<string[]>
+internal class StringArrayTypeHandler : SqlMapper.TypeHandler<string[]>
 {
-    private readonly string separator;
     private const string defaultSeparator = ";";
+
+    private readonly string separator;
 
     public StringArrayTypeHandler(string separator = defaultSeparator)
     {

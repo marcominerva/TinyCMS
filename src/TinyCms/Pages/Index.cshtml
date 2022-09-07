@@ -24,14 +24,14 @@
         }
     }
 
-    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.StyleSheetContent))
-    {
-        <raw><style type="text/css">@Model.ContentPage.StyleSheetContent</style></raw>
-    }
-
     @if(!string.IsNullOrWhiteSpace(Model.ContentPage.Site.StyleSheetContent))
     {
         <raw><style type="text/css">@Model.ContentPage.Site.StyleSheetContent</style></raw>
+    }
+
+    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.StyleSheetContent))
+    {
+        <raw><style type="text/css">@Model.ContentPage.StyleSheetContent</style></raw>
     }
 }
 
