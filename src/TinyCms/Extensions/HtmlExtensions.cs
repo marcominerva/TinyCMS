@@ -9,6 +9,7 @@ public static class HtmlExtensions
     static HtmlExtensions()
     {
         htmlSanitizer.AllowedAttributes.Add("class");
+        htmlSanitizer.AllowedTags.Add("style");
     }
 
     public static string Sanitize(string html)

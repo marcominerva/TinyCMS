@@ -6,4 +6,33 @@
     ViewData["SiteTitle"] = Model.ContentPage.Site.Title;    
 }
 
+@section Head
+{
+    @if (Model.ContentPage.Site.StyleSheetUrls is not null)
+    {
+        @foreach (var styleSheet in Model.ContentPage.Site.StyleSheetUrls)
+        {
+            <link rel="stylesheet" href="@styleSheet" asp-append-version="true" />
+        }
+    }
+
+    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.Site.StyleSheetContent))
+    {
+        <raw><style type="text/css">@Model.ContentPage.Site.StyleSheetContent</style></raw>
+    }
+
+    @if (Model.ContentPage.StyleSheetUrls is not null)
+    {
+        @foreach (var styleSheet in Model.ContentPage.StyleSheetUrls)
+        {
+            <link rel="stylesheet" href="@styleSheet" asp-append-version="true" />
+        }
+    }
+
+    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.StyleSheetContent))
+    {
+        <raw><style type="text/css">@Model.ContentPage.StyleSheetContent</style></raw>
+    }
+}
+
 <raw>@Model.ContentPage.Content</raw>

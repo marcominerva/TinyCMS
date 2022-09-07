@@ -7,6 +7,8 @@ CREATE TABLE [dbo].[ContentPages] (
     [CreationDate]         DATETIME         CONSTRAINT [DF_ContentPages_CreationDate] DEFAULT (getutcdate()) NOT NULL,
     [LastModificationDate] DATETIME         NULL,
     [IsPublished]          BIT              CONSTRAINT [DF_ContentPages_IsPublished] DEFAULT ((1)) NOT NULL,
+    [StyleSheetUrls]       NVARCHAR (MAX)   NULL,
+    [StyleSheetContent]    NVARCHAR (MAX)   NULL,
     CONSTRAINT [PK_ContentPages] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_ContentPages_Sites] FOREIGN KEY ([SiteId]) REFERENCES [dbo].[Sites] ([Id])
 );
