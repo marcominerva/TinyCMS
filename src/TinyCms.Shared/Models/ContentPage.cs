@@ -10,5 +10,9 @@ public class ContentPage
 
     public bool IsPublished { get; set; }
 
+    public string[] StyleSheetUrls { get; set; }
+
+    public string StyleSheetContent { get; set; }
+
     public Site Site { get; set; }
 }
