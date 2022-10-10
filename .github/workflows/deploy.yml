@@ -14,7 +14,7 @@ env:
   DATABASE_PROJECT_FILE: database/TinyCms.Database.sqlproj
 
 jobs:
-  build:
+  build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
 
@@ -22,7 +22,7 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Setup .NET SDK ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.NET_VERSION }}
     
@@ -36,10 +36,12 @@ jobs:
       run: dotnet publish ${{ env.PROJECT_NAME }} --no-build --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       
     - name: Publish Database
-      uses: azure/sql-action@master
+      uses: azure/sql-action@v2
       with:        
         connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        project-file: ${{ env.DATABASE_PROJECT_FILE }}
+        path: ${{ env.DATABASE_PROJECT_FILE }}
+        action: 'publish'
+        build-arguments: '--configuration Release'
         arguments: '/p:BlockOnPossibleDataLoss=false'
        
     - name: Deploy to Azure Web App
