@@ -41,7 +41,6 @@ public class RawContentTagHelper : TagHelper
             return text;
         }
 
-
         string line1 = null;
 
         // find first non-empty line
