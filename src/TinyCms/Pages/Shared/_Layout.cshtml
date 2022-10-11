@@ -57,17 +57,5 @@
     <script src="~/lib/highlightjs-badge.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-
-    <script>
-        // apply HighlightJS
-        var pres = document.querySelectorAll("pre>code");
-        for (var i = 0; i < pres.length; i++) {
-            debugger
-            console.log(pres[i]);
-            hljs.highlightBlock(pres[i]);
-        }
-        // https://github.com/RickStrahl/highlightjs-badge
-        window.highlightJsBadge();
-    </script>
 </body>
 </html>

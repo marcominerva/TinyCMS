@@ -1,7 +1,6 @@
-﻿using System.Text;
+﻿using Markdig;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using TinyCms.Extensions;
-using Westwind.AspNetCore.Markdown;
 
 namespace TinyCms.TagHelpers;
 
@@ -14,87 +13,15 @@ public class RawContentTagHelper : TagHelper
     {
         var childContent = await output.GetChildContentAsync(NullHtmlEncoder.Default);
         var html = childContent.GetContent(NullHtmlEncoder.Default);
-
+        html = Markdown.ToHtml(html);
         if (Sanitize)
         {
             html = HtmlExtensions.Sanitize(html);
         }
 
-        html = Markdown.Parse(NormalizeWhiteSpaceText(html));
-
         output.TagName = null;
         output.Content.SetHtmlContent(html);
 
         await base.ProcessAsync(context, output);
-    }
-
-    private static string NormalizeWhiteSpaceText(string text)
-    {
-        if (string.IsNullOrEmpty(text))
-        {
-            return text;
-        }
-
-        var lines = GetLines(text);
-        if (lines.Length < 1)
-        {
-            return text;
-        }
-
-        string line1 = null;
-
-        // find first non-empty line
-        for (var i = 0; i < lines.Length; i++)
-        {
-            line1 = lines[i];
-            if (!string.IsNullOrEmpty(line1))
-            {
-                break;
-            }
-        }
-
-        if (string.IsNullOrEmpty(line1))
-        {
-            return text;
-        }
-
-        var trimLine = line1.TrimStart();
-        var whitespaceCount = line1.Length - trimLine.Length;
-        if (whitespaceCount == 0)
-        {
-            return text;
-        }
-
-        var sb = new StringBuilder();
-        for (var i = 0; i < lines.Length; i++)
-        {
-            if (lines[i].Length > whitespaceCount)
-            {
-                sb.AppendLine(lines[i].Substring(whitespaceCount));
-            }
-            else
-            {
-                sb.AppendLine(lines[i]);
-            }
-        }
-
-        return sb.ToString();
-
-        string[] GetLines(string s, int maxLines = 0)
-        {
-            if (s is null)
-            {
-                return null;
-            }
-
-            s = s.Replace("\r\n", "\n");
-
-            if (maxLines < 1)
-            {
-                return s.Split(new char[] { '\n' });
-            }
-
-            return s.Split(new char[] { '\n' }).Take(maxLines).ToArray();
-        }
     }
 }
