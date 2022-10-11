@@ -1,6 +1,7 @@
 using TinyCms.BusinessLayer.Services;
 using TinyCms.BusinessLayer.Services.Interfaces;
 using TinyCms.DataAccessLayer;
+using Westwind.AspNetCore.Markdown;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSqlContext(options =>
 });
 
 builder.Services.AddScoped<IPageService, PageService>();
+builder.Services.AddMarkdown();
 
 var app = builder.Build();
 app.UseHttpsRedirection();
@@ -27,6 +29,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStatusCodePagesWithReExecute("/Index/{0}");
+
+app.UseMarkdown();
 
 app.UseStaticFiles();
 

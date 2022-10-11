@@ -51,6 +51,23 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
+    <!-- Syntax Highlighting code -->
+    <script src="~/lib/highlightjs/highlight.pack.js"></script>
+    <link href="~/lib/highlightjs/styles/vs2015.css" rel="stylesheet" />
+    <script src="~/lib/highlightjs-badge.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        // apply HighlightJS
+        var pres = document.querySelectorAll("pre>code");
+        for (var i = 0; i < pres.length; i++) {
+            debugger
+            console.log(pres[i]);
+            hljs.highlightBlock(pres[i]);
+        }
+        // https://github.com/RickStrahl/highlightjs-badge
+        window.highlightJsBadge();
+    </script>
 </body>
 </html>
