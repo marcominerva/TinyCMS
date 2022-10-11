@@ -28,7 +28,7 @@ public class RawContentTagHelper : TagHelper
         await base.ProcessAsync(context, output);
     }
 
-    private string NormalizeWhiteSpaceText(string text)
+    private static string NormalizeWhiteSpaceText(string text)
     {
         if (string.IsNullOrEmpty(text))
             return text;
@@ -65,18 +65,18 @@ public class RawContentTagHelper : TagHelper
         }
 
         return sb.ToString();
-    }
 
-    private string[] GetLines(string s, int maxLines = 0)
-    {
-        if (s == null)
-            return null;
+        string[] GetLines(string s, int maxLines = 0)
+        {
+            if (s == null)
+                return null;
 
-        s = s.Replace("\r\n", "\n");
+            s = s.Replace("\r\n", "\n");
 
-        if (maxLines < 1)
-            return s.Split(new char[] { '\n' });
+            if (maxLines < 1)
+                return s.Split(new char[] { '\n' });
 
-        return s.Split(new char[] { '\n' }).Take(maxLines).ToArray();
+            return s.Split(new char[] { '\n' }).Take(maxLines).ToArray();
+        }
     }
 }
