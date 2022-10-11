@@ -82,7 +82,7 @@ public class RawContentTagHelper : TagHelper
 
         string[] GetLines(string s, int maxLines = 0)
         {
-            if (s == null)
+            if (s is null)
             {
                 return null;
             }
