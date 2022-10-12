@@ -1,4 +1,5 @@
-﻿using Markdig;
+﻿using System.Text.RegularExpressions;
+using Markdig;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using TinyCms.Extensions;
 
@@ -13,10 +14,15 @@ public class RawContentTagHelper : TagHelper
     {
         var childContent = await output.GetChildContentAsync(NullHtmlEncoder.Default);
         var content = childContent.GetContent(NullHtmlEncoder.Default);
-        content = Markdown.ToHtml(content);
+        var isHtml = new Regex("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>").IsMatch(content);
+        if (!isHtml)
+        {
+            content = Markdown.ToHtml(content);
+        }
+
         if (Sanitize)
         {
-            content = HtmlExtensions.Sanitize(html);
+            content = HtmlExtensions.Sanitize(content);
         }
 
         output.TagName = null;
