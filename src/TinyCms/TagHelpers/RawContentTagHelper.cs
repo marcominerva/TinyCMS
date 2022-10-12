@@ -14,8 +14,9 @@ public class RawContentTagHelper : TagHelper
     {
         var childContent = await output.GetChildContentAsync(NullHtmlEncoder.Default);
         var content = childContent.GetContent(NullHtmlEncoder.Default);
-        var isHtml = new Regex("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>").IsMatch(content);
-        if (!isHtml)
+
+        var isHtml = Regex.Match(content, "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>");
+        if (!isHtml.Success)
         {
             content = Markdown.ToHtml(content);
         }
