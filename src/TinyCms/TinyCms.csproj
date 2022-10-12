@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="HtmlSanitizer" Version="7.1.542" />
+    <PackageReference Include="Markdig" Version="0.30.4" />
   </ItemGroup>
 
   <ItemGroup>
