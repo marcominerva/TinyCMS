@@ -10,6 +10,7 @@ public static class HtmlExtensions
     {
         htmlSanitizer.AllowedAttributes.Add("class");
         htmlSanitizer.AllowedTags.Add("style");
+        htmlSanitizer.AllowedSchemes.Add("data");
     }
 
     public static string Sanitize(string html)

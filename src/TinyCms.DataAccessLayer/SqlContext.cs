@@ -41,9 +41,7 @@ internal class SqlContext : ISqlContext
             type.GetProperty(columnName)
         );
 
-        SqlMapper.SetTypeMap(typeof(Site), new CustomPropertyTypeMap(typeof(Site), (type, columnName) =>
-            mapper(type, columnName)));
-
+        SqlMapper.SetTypeMap(typeof(Site), new CustomPropertyTypeMap(typeof(Site), (type, columnName) => mapper(type, columnName)));
         SqlMapper.AddTypeHandler(new StringArrayTypeHandler());
     }
 
