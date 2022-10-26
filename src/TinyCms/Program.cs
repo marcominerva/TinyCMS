@@ -29,7 +29,6 @@ if (!app.Environment.IsDevelopment())
 app.UseStatusCodePagesWithReExecute("/Index/{0}");
 
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.MapRazorPages();
