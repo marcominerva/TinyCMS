@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using System.Text.RegularExpressions;
+using Markdig;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using TinyCms.Extensions;
 
 namespace TinyCms.TagHelpers;
@@ -11,15 +13,21 @@ public class RawContentTagHelper : TagHelper
     public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
     {
         var childContent = await output.GetChildContentAsync(NullHtmlEncoder.Default);
-        var html = childContent.GetContent(NullHtmlEncoder.Default);
+        var content = childContent.GetContent(NullHtmlEncoder.Default);
+
+        var isHtml = Regex.Match(content, "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>", RegexOptions.Compiled);
+        if (!isHtml.Success)
+        {
+            content = Markdown.ToHtml(content);
+        }
 
         if (Sanitize)
         {
-            html = HtmlExtensions.Sanitize(html);
+            content = HtmlExtensions.Sanitize(content);
         }
 
         output.TagName = null;
-        output.Content.SetHtmlContent(html);
+        output.Content.SetHtmlContent(content);
 
         await base.ProcessAsync(context, output);
     }
