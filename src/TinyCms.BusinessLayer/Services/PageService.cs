@@ -1,4 +1,5 @@
-﻿using TinyCms.BusinessLayer.Services.Interfaces;
+﻿using StorageProviders;
+using TinyCms.BusinessLayer.Services.Interfaces;
 using TinyCms.DataAccessLayer;
 using TinyCms.Shared.Models;
 
@@ -7,10 +8,12 @@ namespace TinyCms.BusinessLayer.Services;
 public class PageService : IPageService
 {
     private readonly ISqlContext context;
+    private readonly IStorageProvider storageProvider;
 
-    public PageService(ISqlContext context)
+    public PageService(ISqlContext context, IStorageProvider storageProvider)
     {
         this.context = context;
+        this.storageProvider = storageProvider;
     }
 
     public async Task<ContentPage> GetAsync(string url)
@@ -30,6 +33,23 @@ public class PageService : IPageService
             },
             param: new { url },
             splitOn: "SiteId");
+
+        if (contentPage is not null)
+        {
+            var extension = Path.GetExtension(contentPage.Content);
+
+            //if (extension == ".inc" || extension == ".md" || extension == ".htm" || extension == ".html")
+            if (extension.ToLowerInvariant() is ".inc" or ".md" or ".htm" or ".html")
+            {
+                var content = await storageProvider.ReadAsStringAsync(contentPage.Content);
+                if (content is null)
+                {
+                    return null;
+                }
+
+                contentPage.Content = content;
+            }
+        }
 
         return contentPage;
     }

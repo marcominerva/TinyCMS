@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\StorageProviders\StorageProviders.csproj" />
     <ProjectReference Include="..\TinyCms.DataAccessLayer\TinyCms.DataAccessLayer.csproj" />
     <ProjectReference Include="..\TinyCms.Shared\TinyCms.Shared.csproj" />
   </ItemGroup>

@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyCms.BusinessLayer", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyCms.Shared", "src\TinyCms.Shared\TinyCms.Shared.csproj", "{D6F22AD6-CBE9-459B-A34E-196D10D51D65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageProviders", "StorageProviders\StorageProviders.csproj", "{47AADA49-0884-49FB-9E66-37328FB10A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{D6F22AD6-CBE9-459B-A34E-196D10D51D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F22AD6-CBE9-459B-A34E-196D10D51D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F22AD6-CBE9-459B-A34E-196D10D51D65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47AADA49-0884-49FB-9E66-37328FB10A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47AADA49-0884-49FB-9E66-37328FB10A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47AADA49-0884-49FB-9E66-37328FB10A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47AADA49-0884-49FB-9E66-37328FB10A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
