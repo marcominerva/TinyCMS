@@ -16,22 +16,16 @@ internal class AzureStorageProvider : IStorageProvider
     public async Task<Stream> ReadAsStreamAsync(string path)
     {
         var blobContainerClient = blobServiceClient.GetBlobContainerClient(settings.ContainerName);
-        var exists = await blobContainerClient.ExistsAsync();
-
-        if (!exists)
-        {
-            return null;
-        }
-
         var blobClient = blobContainerClient.GetBlobClient(path);
-        exists = await blobClient.ExistsAsync();
 
-        if (!exists)
+        try
+        {
+            var stream = await blobClient.OpenReadAsync();
+            return stream;
+        }
+        catch
         {
             return null;
         }
-
-        var stream = await blobClient.OpenReadAsync();
-        return stream;
     }
 }
