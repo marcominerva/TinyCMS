@@ -30,6 +30,7 @@ else
 {
     builder.Services.AddFileSystemStorage(options =>
     {
+        options.SiteRootFolder = builder.Environment.WebRootPath;
         options.StorageFolder = storageFolder;
     });
 }

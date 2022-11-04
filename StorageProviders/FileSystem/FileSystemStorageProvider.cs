@@ -14,12 +14,12 @@ internal class FileSystemStorageProvider : IStorageProvider
         path = Path.Combine(settings.StorageFolder, path);
         if (!Path.IsPathRooted(path))
         {
-            path = Path.Combine(AppContext.BaseDirectory, path);
+            path = Path.Combine(settings.SiteRootFolder, path);
         }
 
         if (!File.Exists(path))
         {
-            return null;
+            return Task.FromResult<Stream>(null);
         }
 
         var stream = File.OpenRead(path);
