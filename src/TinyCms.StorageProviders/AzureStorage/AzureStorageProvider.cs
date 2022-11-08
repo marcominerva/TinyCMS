@@ -1,6 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 
-namespace StorageProviders.AzureStorage;
+namespace TinyCms.StorageProviders.AzureStorage;
 
 internal class AzureStorageProvider : IStorageProvider
 {

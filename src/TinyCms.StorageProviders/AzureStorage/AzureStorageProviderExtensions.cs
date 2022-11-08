@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace StorageProviders.AzureStorage;
+namespace TinyCms.StorageProviders.AzureStorage;
 
 public static class AzureStorageProviderExtensions
 {

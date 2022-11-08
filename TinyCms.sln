@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyCms.BusinessLayer", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyCms.Shared", "src\TinyCms.Shared\TinyCms.Shared.csproj", "{D6F22AD6-CBE9-459B-A34E-196D10D51D65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageProviders", "StorageProviders\StorageProviders.csproj", "{47AADA49-0884-49FB-9E66-37328FB10A3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.StorageProviders", "src\TinyCms.StorageProviders\TinyCms.StorageProviders.csproj", "{47AADA49-0884-49FB-9E66-37328FB10A3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

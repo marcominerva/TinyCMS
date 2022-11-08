@@ -1,7 +1,7 @@
-﻿using StorageProviders;
-using TinyCms.BusinessLayer.Services.Interfaces;
+﻿using TinyCms.BusinessLayer.Services.Interfaces;
 using TinyCms.DataAccessLayer;
 using TinyCms.Shared.Models;
+using TinyCms.StorageProviders;
 
 namespace TinyCms.BusinessLayer.Services;
 
@@ -36,10 +36,10 @@ public class PageService : IPageService
 
         if (contentPage is not null)
         {
-            var extension = Path.GetExtension(contentPage.Content);
+            var extension = Path.GetExtension(contentPage.Content)?.ToLowerInvariant();
 
             //if (extension == ".inc" || extension == ".md" || extension == ".htm" || extension == ".html")
-            if (extension.ToLowerInvariant() is ".inc" or ".md" or ".htm" or ".html")
+            if (extension is ".inc" or ".md" or ".htm" or ".html")
             {
                 var content = await storageProvider.ReadAsStringAsync(contentPage.Content);
                 if (content is null)

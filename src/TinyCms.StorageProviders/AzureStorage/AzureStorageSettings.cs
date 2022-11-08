@@ -1,4 +1,4 @@
-﻿namespace StorageProviders.AzureStorage;
+﻿namespace TinyCms.StorageProviders.AzureStorage;
 
 public class AzureStorageSettings
 {
