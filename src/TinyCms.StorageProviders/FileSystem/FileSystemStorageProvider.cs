@@ -1,4 +1,4 @@
-﻿namespace StorageProviders.FileSystem;
+﻿namespace TinyCms.StorageProviders.FileSystem;
 
 internal class FileSystemStorageProvider : IStorageProvider
 {

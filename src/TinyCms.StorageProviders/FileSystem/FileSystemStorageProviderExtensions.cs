@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace StorageProviders.FileSystem;
+namespace TinyCms.StorageProviders.FileSystem;
 
 public static class FileSystemStorageProviderExtensions
 {

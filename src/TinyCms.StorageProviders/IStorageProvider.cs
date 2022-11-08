@@ -1,4 +1,4 @@
-﻿namespace StorageProviders;
+﻿namespace TinyCms.StorageProviders;
 
 public interface IStorageProvider
 {

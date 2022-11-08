@@ -1,8 +1,8 @@
-using StorageProviders.AzureStorage;
-using StorageProviders.FileSystem;
 using TinyCms.BusinessLayer.Services;
 using TinyCms.BusinessLayer.Services.Interfaces;
 using TinyCms.DataAccessLayer;
+using TinyCms.StorageProviders.AzureStorage;
+using TinyCms.StorageProviders.FileSystem;
 
 var builder = WebApplication.CreateBuilder(args);
 

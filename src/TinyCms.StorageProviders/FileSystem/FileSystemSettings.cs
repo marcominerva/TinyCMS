@@ -1,4 +1,4 @@
-﻿namespace StorageProviders.FileSystem;
+﻿namespace TinyCms.StorageProviders.FileSystem;
 
 public class FileSystemSettings
 {
