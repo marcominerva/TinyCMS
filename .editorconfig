@@ -9,7 +9,7 @@ root = true
 indent_size = 4
 indent_style = space
 tab_width = 4
-trim_trailing_whitespace = true
+trim_trailing_whitespace = false
 
 # New line preferences
 end_of_line = unset
