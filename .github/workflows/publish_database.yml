@@ -1,0 +1,35 @@
+name: Publish Database on Azure
+
+on:
+  push:
+    branches: [ master ]
+    paths: [ 'database/**' ]
+  workflow_dispatch:
+
+env:
+  NET_VERSION: '7.x'
+  DATABASE_PROJECT_FILE: database/TinyCms.Database.sqlproj
+
+jobs:
+  publish-database:
+    name: Publish Database
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Setup .NET SDK ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+        dotnet-quality: 'ga'
+      
+    - name: Publish Database
+      uses: azure/sql-action@v2
+      with:        
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        path: ${{ env.DATABASE_PROJECT_FILE }}
+        action: 'publish'
+        build-arguments: '--configuration Release'
+        arguments: '/p:BlockOnPossibleDataLoss=false'
