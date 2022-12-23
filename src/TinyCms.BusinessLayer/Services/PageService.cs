@@ -40,7 +40,6 @@ public class PageService : IPageService
         {
             var extension = Path.GetExtension(contentPage.Content)?.ToLowerInvariant();
 
-            //if (extension == ".inc" || extension == ".md" || extension == ".htm" || extension == ".html")
             if (extension is ".inc" or ".md" or ".htm" or ".html")
             {
                 var content = await storageProvider.ReadAsStringAsync(contentPage.Content);

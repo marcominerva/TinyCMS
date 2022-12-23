@@ -6,8 +6,11 @@ using TinyCms.Extensions;
 namespace TinyCms.TagHelpers;
 
 [HtmlTargetElement("raw")]
-public class RawContentTagHelper : TagHelper
+public partial class RawContentTagHelper : TagHelper
 {
+    [GeneratedRegex("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")]
+    private static partial Regex htmlRegex();
+
     public bool Sanitize { get; set; } = true;
 
     public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
@@ -15,8 +18,8 @@ public class RawContentTagHelper : TagHelper
         var childContent = await output.GetChildContentAsync(NullHtmlEncoder.Default);
         var content = childContent.GetContent(NullHtmlEncoder.Default);
 
-        var isHtml = Regex.Match(content, "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>", RegexOptions.Compiled);
-        if (!isHtml.Success)
+        var isHtml = htmlRegex().IsMatch(content);
+        if (!isHtml)
         {
             content = Markdown.ToHtml(content);
         }
