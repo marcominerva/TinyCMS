@@ -1,0 +1,40 @@
+name: Deploy on Azure
+
+on:
+  push:
+    branches: [ master ]
+    paths: [ 'src/**' ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: tinycms
+  AZURE_WEBAPP_PACKAGE_PATH: './published'
+  NET_VERSION: '7.x'
+  PROJECT_NAME: src/TinyCms
+  RUNTIME: win-x86
+  
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Setup .NET SDK ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+        dotnet-quality: 'ga'
+         
+    - name: Publish
+      run: dotnet publish ${{ env.PROJECT_NAME }} --configuration Release -r ${{ env.RUNTIME }} --self-contained true --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      #run: dotnet publish ${{ env.PROJECT_NAME }} --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+                   
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
