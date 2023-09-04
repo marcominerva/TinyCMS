@@ -11,6 +11,8 @@ public partial class RawContentTagHelper : TagHelper
     [GeneratedRegex("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")]
     private static partial Regex htmlRegex();
 
+    private static readonly MarkdownPipeline markdownPipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+
     public bool Sanitize { get; set; } = true;
 
     public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
@@ -21,7 +23,7 @@ public partial class RawContentTagHelper : TagHelper
         var isHtml = htmlRegex().IsMatch(content);
         if (!isHtml)
         {
-            content = Markdown.ToHtml(content);
+            content = Markdown.ToHtml(content, markdownPipeline);
         }
 
         if (Sanitize)

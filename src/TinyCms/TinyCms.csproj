@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
-    <PackageReference Include="HtmlSanitizer" Version="8.0.601" />
-    <PackageReference Include="Markdig" Version="0.30.4" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.386" />
+        <PackageReference Include="HtmlSanitizer" Version="8.0.692" />
+        <PackageReference Include="Markdig" Version="0.33.0" />
+        <PackageReference Include="TinyHelpers" Version="2.0.35" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TinyCms.BusinessLayer\TinyCms.BusinessLayer.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\TinyCms.BusinessLayer\TinyCms.BusinessLayer.csproj" />
+    </ItemGroup>
 
 </Project>

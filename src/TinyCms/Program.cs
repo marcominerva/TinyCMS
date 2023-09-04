@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddWebOptimizer(minifyCss: true, minifyJavaScript: builder.Environment.IsProduction());
 
 builder.Services.AddSqlContext(options =>
 {
@@ -49,6 +50,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStatusCodePagesWithReExecute("/Index/{0}");
 
+app.UseWebOptimizer();
 app.UseStaticFiles();
 app.UseRouting();
 
