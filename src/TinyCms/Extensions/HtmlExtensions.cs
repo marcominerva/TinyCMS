@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Css.Dom;
 using AngleSharp.Svg.Dom;
 using Ganss.Xss;
+using TinyHelpers.Extensions;
 
 namespace TinyCms.Extensions;
 
@@ -25,7 +26,26 @@ public static class HtmlExtensions
         htmlSanitizer.AllowedAtRules.Add(CssRuleType.Keyframe);
         htmlSanitizer.AllowedAtRules.Add(CssRuleType.Page);
 
-        htmlSanitizer.RemovingTag += (s, e) => e.Cancel = e.Tag is SvgElement;
+        htmlSanitizer.RemovingTag += (s, e) =>
+        {
+            if (e.Tag is SvgElement)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                // Add exceptions for Video IFrame sources.
+                if (e.Tag.NodeName.EqualsIgnoreCase("iframe"))
+                {
+                    var src = e.Tag.GetAttribute("src");
+                    if (src.ContainsIgnoreCase("youtube"))
+                    {
+                        e.Cancel = true;
+                    }
+                }
+            }
+        };
+
         htmlSanitizer.RemovingAttribute += (s, e) => e.Cancel = e.Tag is SvgElement;
     }
 
