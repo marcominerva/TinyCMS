@@ -33,7 +33,8 @@ internal class SqlContext : ISqlContext
             ["SiteId"] = "Id",
             ["SiteTitle"] = "Title",
             ["SiteStyleSheetUrls"] = "StyleSheetUrls",
-            ["SiteStyleSheetContent"] = "StyleSheetContent"
+            ["SiteStyleSheetContent"] = "StyleSheetContent",
+            ["IsSitePublished"] = "IsPublished"
         };
 
         var mapper = new Func<Type, string, PropertyInfo>((type, columnName) =>

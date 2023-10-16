@@ -6,6 +6,8 @@ public class Site
 
     public string Title { get; set; }
 
+    public bool IsPublished { get; set; }
+
     public string[] StyleSheetUrls { get; set; }
 
     public string StyleSheetContent { get; set; }
