@@ -21,10 +21,10 @@ public class PageService : IPageService
         url ??= "index";
         var query = """
                     SELECT p.Id, p.Title, p.Content, p.IsPublished, p.StyleSheetUrls, p.StyleSheetContent,
-                        s.Id AS SiteId, s.Title AS SiteTitle, s.IsPublished AS IsSitePublished, s.StyleSheetUrls AS SiteStyleSheetUrls, s.StyleSheetContent AS SiteStyleSheetContent
+                        s.Id AS SiteId, s.Title AS SiteTitle, s.StyleSheetUrls AS SiteStyleSheetUrls, s.StyleSheetContent AS SiteStyleSheetContent
                     FROM ContentPages p
                     INNER JOIN Sites s ON p.SiteId = s.Id
-                    WHERE [Url] = @url
+                    WHERE [Url] = @url AND s.IsPublished = 1
                     """;
 
         var contentPage = await context.GetObjectAsync<ContentPage, Site, ContentPage>(query,

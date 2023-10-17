@@ -20,7 +20,7 @@ public class IndexModel : PageModel
     {
         ContentPage = await pageService.GetAsync(url);
 
-        if (ContentPage is null || !ContentPage.Site.IsPublished)
+        if (ContentPage is null)
         {
             return NotFound();
         }
