@@ -1,8 +1,11 @@
 using TinyCms.BusinessLayer.Services;
 using TinyCms.BusinessLayer.Services.Interfaces;
+using TinyCms.BusinessLayer.Settings;
 using TinyCms.DataAccessLayer;
 using TinyCms.StorageProviders.AzureStorage;
 using TinyCms.StorageProviders.FileSystem;
+using TinyHelpers.AspNetCore.Extensions;
+using TinyHelpers.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,14 +20,15 @@ builder.Services.AddSqlContext(options =>
 
 builder.Services.AddScoped<IPageService, PageService>();
 
-var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
-var storageFolder = builder.Configuration.GetValue<string>("AppSettings:StorageFolder");
-if (!string.IsNullOrWhiteSpace(azureStorageConnectionString))
+var appSettings = builder.Services.ConfigureAndGet<AppSettings>(builder.Configuration, nameof(AppSettings));
+
+var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorageConnection");
+if (azureStorageConnectionString.HasValue())
 {
     builder.Services.AddAzureStorage(options =>
     {
         options.ConnectionString = azureStorageConnectionString;
-        options.ContainerName = storageFolder;
+        options.ContainerName = appSettings.StorageFolder;
     });
 }
 else
@@ -32,7 +36,7 @@ else
     builder.Services.AddFileSystemStorage(options =>
     {
         options.SiteRootFolder = builder.Environment.WebRootPath;
-        options.StorageFolder = storageFolder;
+        options.StorageFolder = appSettings.StorageFolder;
     });
 }
 

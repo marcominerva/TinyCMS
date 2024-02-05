@@ -10,6 +10,7 @@
     <link type="image/png" sizes="96x96" rel="icon" href="~/favicon-96.png">
 
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -20,7 +21,17 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" href="/">@ViewData["SiteTitle"]</a>                
+                <a class="navbar-brand fs-4" href="/">
+                    @if (!string.IsNullOrWhiteSpace((string)ViewData["LogoUrl"]))
+                    {
+                        <img src="@ViewData["LogoUrl"]" alt="@ViewData["SiteTitle"]" title="@ViewData["SiteTitle"]" height="30" class="d-inline-block align-middle">
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace((string)ViewData["LogoUrl"]) && (bool)ViewData["ShowLogoOnly"] == false)
+                    {
+                        @ViewData["SiteTitle"]
+                    }
+                </a>
             </div>
         </nav>
     </header>

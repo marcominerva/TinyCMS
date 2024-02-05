@@ -5,16 +5,9 @@ using TinyCms.Shared.Models;
 
 namespace TinyCms.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel(IPageService pageService) : PageModel
 {
-    private readonly IPageService pageService;
-
     public ContentPage ContentPage { get; set; }
-
-    public IndexModel(IPageService pageService)
-    {
-        this.pageService = pageService;
-    }
 
     public async Task<IActionResult> OnGetAsync(string url)
     {

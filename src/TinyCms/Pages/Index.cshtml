@@ -3,7 +3,9 @@
 @model IndexModel
 @{
     ViewData["Title"] = Model.ContentPage.Title;
-    ViewData["SiteTitle"] = Model.ContentPage.Site.Title;    
+    ViewData["SiteTitle"] = Model.ContentPage.Site.Title;
+    ViewData["LogoUrl"]=Model.ContentPage.Site.LogoUrl;
+    ViewData["ShowLogoOnly"]=Model.ContentPage.Site.ShowLogoOnly;
 }
 
 @section Head

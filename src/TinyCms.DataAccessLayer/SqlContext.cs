@@ -7,9 +7,9 @@ using TinyCms.Shared.Models;
 
 namespace TinyCms.DataAccessLayer;
 
-internal class SqlContext : ISqlContext
+internal class SqlContext(SqlContextOptions options) : ISqlContext
 {
-    private IDbConnection connection;
+    private IDbConnection connection = new SqlConnection(options.ConnectionString);
     private bool disposedValue;
 
     private IDbConnection Connection
@@ -43,11 +43,6 @@ internal class SqlContext : ISqlContext
 
         SqlMapper.SetTypeMap(typeof(Site), new CustomPropertyTypeMap(typeof(Site), (type, columnName) => mapper(type, columnName)));
         SqlMapper.AddTypeHandler(new StringArrayTypeHandler());
-    }
-
-    public SqlContext(SqlContextOptions options)
-    {
-        connection = new SqlConnection(options.ConnectionString);
     }
 
     public Task<IEnumerable<T>> GetDataAsync<T>(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = null)
@@ -181,11 +176,5 @@ internal class SqlContext : ISqlContext
         GC.SuppressFinalize(this);
     }
 
-    private void ThrowIfDisposed()
-    {
-        if (disposedValue)
-        {
-            throw new ObjectDisposedException(GetType().FullName);
-        }
-    }
+    private void ThrowIfDisposed() => ObjectDisposedException.ThrowIf(disposedValue, GetType().FullName);
 }
