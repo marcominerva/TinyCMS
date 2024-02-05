@@ -5,17 +5,8 @@ using TinyCms.StorageProviders;
 
 namespace TinyCms.BusinessLayer.Services;
 
-public class PageService : IPageService
+public class PageService(ISqlContext context, IStorageProvider storageProvider) : IPageService
 {
-    private readonly ISqlContext context;
-    private readonly IStorageProvider storageProvider;
-
-    public PageService(ISqlContext context, IStorageProvider storageProvider)
-    {
-        this.context = context;
-        this.storageProvider = storageProvider;
-    }
-
     public async Task<ContentPage> GetAsync(string url)
     {
         url ??= "index";

@@ -17,7 +17,7 @@ builder.Services.AddSqlContext(options =>
 
 builder.Services.AddScoped<IPageService, PageService>();
 
-var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
+var azureStorageConnectionString = builder.Configuration.GetConnectionString("AzureStorageConnection");
 var storageFolder = builder.Configuration.GetValue<string>("AppSettings:StorageFolder");
 if (!string.IsNullOrWhiteSpace(azureStorageConnectionString))
 {
