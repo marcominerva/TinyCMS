@@ -14,7 +14,7 @@ public class PageService(ISqlContext context, IStorageProvider storageProvider, 
         url ??= "index";
         var query = """
                     SELECT p.Id, p.Title, p.Content, p.IsPublished, p.StyleSheetUrls, p.StyleSheetContent,
-                        s.Id AS SiteId, s.Title AS SiteTitle, s.StyleSheetUrls AS SiteStyleSheetUrls, s.StyleSheetContent AS SiteStyleSheetContent
+                        s.Id AS SiteId, s.Title AS SiteTitle, s.LogoUrl, s.ShowLogoOnly, s.StyleSheetUrls AS SiteStyleSheetUrls, s.StyleSheetContent AS SiteStyleSheetContent
                     FROM ContentPages p
                     INNER JOIN Sites s ON p.SiteId = s.Id
                     WHERE s.Id = @siteId AND p.Url = @url
