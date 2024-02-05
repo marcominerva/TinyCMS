@@ -17,7 +17,7 @@ public class PageService(ISqlContext context, IStorageProvider storageProvider, 
                         s.Id AS SiteId, s.Title AS SiteTitle, s.LogoUrl, s.ShowLogoOnly, s.StyleSheetUrls AS SiteStyleSheetUrls, s.StyleSheetContent AS SiteStyleSheetContent
                     FROM ContentPages p
                     INNER JOIN Sites s ON p.SiteId = s.Id
-                    WHERE s.Id = @siteId AND p.Url = @url
+                    WHERE s.Id = @siteId AND p.Url = @url AND s.IsPublished = 1
                     """;
 
         var contentPage = await context.GetObjectAsync<ContentPage, Site, ContentPage>(query,

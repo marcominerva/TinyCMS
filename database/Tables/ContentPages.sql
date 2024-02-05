@@ -12,18 +12,6 @@ CREATE TABLE [dbo].[ContentPages] (
 );
 GO
 
-CREATE NONCLUSTERED INDEX [IX_ContentPages]
-    ON [dbo].[ContentPages]([Url] ASC);
-GO
-
-CREATE UNIQUE NONCLUSTERED INDEX [IX_ContentPages_UniqueUrl]
-    ON [dbo].[ContentPages]([SiteId] ASC, [Url] ASC);
-GO
-
-ALTER TABLE [dbo].[ContentPages]
-    ADD CONSTRAINT [FK_ContentPages_Sites] FOREIGN KEY ([SiteId]) REFERENCES [dbo].[Sites] ([Id]);
-GO
-
 ALTER TABLE [dbo].[ContentPages]
     ADD CONSTRAINT [PK_ContentPages] PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
@@ -33,10 +21,22 @@ ALTER TABLE [dbo].[ContentPages]
 GO
 
 ALTER TABLE [dbo].[ContentPages]
-    ADD CONSTRAINT [DF_ContentPages_IsPublished] DEFAULT ((1)) FOR [IsPublished];
+    ADD CONSTRAINT [DF_ContentPages_CreationDate] DEFAULT (getutcdate()) FOR [CreationDate];
 GO
 
 ALTER TABLE [dbo].[ContentPages]
-    ADD CONSTRAINT [DF_ContentPages_CreationDate] DEFAULT (getutcdate()) FOR [CreationDate];
+    ADD CONSTRAINT [DF_ContentPages_IsPublished] DEFAULT ((1)) FOR [IsPublished];
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_ContentPages_UniqueUrl]
+    ON [dbo].[ContentPages]([SiteId] ASC, [Url] ASC);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_ContentPages]
+    ON [dbo].[ContentPages]([Url] ASC);
+GO
+
+ALTER TABLE [dbo].[ContentPages]
+    ADD CONSTRAINT [FK_ContentPages_Sites] FOREIGN KEY ([SiteId]) REFERENCES [dbo].[Sites] ([Id]);
 GO
 
