@@ -1,11 +1,13 @@
-﻿using TinyCms.BusinessLayer.Services.Interfaces;
+﻿using Microsoft.Extensions.Options;
+using TinyCms.BusinessLayer.Services.Interfaces;
+using TinyCms.BusinessLayer.Settings;
 using TinyCms.DataAccessLayer;
 using TinyCms.Shared.Models;
 using TinyCms.StorageProviders;
 
 namespace TinyCms.BusinessLayer.Services;
 
-public class PageService(ISqlContext context, IStorageProvider storageProvider) : IPageService
+public class PageService(ISqlContext context, IStorageProvider storageProvider, IOptions<AppSettings> appSettingsOptions) : IPageService
 {
     public async Task<ContentPage> GetAsync(string url)
     {
@@ -15,7 +17,7 @@ public class PageService(ISqlContext context, IStorageProvider storageProvider) 
                         s.Id AS SiteId, s.Title AS SiteTitle, s.StyleSheetUrls AS SiteStyleSheetUrls, s.StyleSheetContent AS SiteStyleSheetContent
                     FROM ContentPages p
                     INNER JOIN Sites s ON p.SiteId = s.Id
-                    WHERE [Url] = @url
+                    WHERE s.Id = @siteId AND p.Url = @url
                     """;
 
         var contentPage = await context.GetObjectAsync<ContentPage, Site, ContentPage>(query,
@@ -24,7 +26,7 @@ public class PageService(ISqlContext context, IStorageProvider storageProvider) 
                 contentPage.Site = site;
                 return contentPage;
             },
-            param: new { url },
+            param: new { appSettingsOptions.Value.SiteId, url },
             splitOn: "SiteId");
 
         if (contentPage is not null)
