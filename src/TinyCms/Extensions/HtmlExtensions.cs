@@ -49,7 +49,7 @@ public static class HtmlExtensions
         htmlSanitizer.RemovingAttribute += (s, e) => e.Cancel = e.Tag is SvgElement;
     }
 
-    public static string Sanitize(string html)
+    public static string? Sanitize(string? html)
     {
         if (html is null)
         {

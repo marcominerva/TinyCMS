@@ -1,28 +1,21 @@
 ﻿namespace TinyCms.StorageProviders.FileSystem;
 
-internal class FileSystemStorageProvider : IStorageProvider
+internal class FileSystemStorageProvider(FileSystemSettings settings) : IStorageProvider
 {
-    private readonly FileSystemSettings settings;
-
-    public FileSystemStorageProvider(FileSystemSettings settings)
+    public Task<Stream?> ReadAsStreamAsync(string path)
     {
-        this.settings = settings;
-    }
-
-    public Task<Stream> ReadAsStreamAsync(string path)
-    {
-        path = Path.Combine(settings.StorageFolder, path);
+        path = Path.Combine(settings.StorageFolder ?? string.Empty, path);
         if (!Path.IsPathRooted(path))
         {
-            path = Path.Combine(settings.SiteRootFolder, path);
+            path = Path.Combine(settings.SiteRootFolder ?? string.Empty, path);
         }
 
         if (!File.Exists(path))
         {
-            return Task.FromResult<Stream>(null);
+            return Task.FromResult<Stream?>(null);
         }
 
         var stream = File.OpenRead(path);
-        return Task.FromResult(stream as Stream);
+        return Task.FromResult<Stream?>(stream);
     }
 }

@@ -2,7 +2,7 @@
 
 public class FileSystemSettings
 {
-    public string SiteRootFolder { get; set; }
+    public string? SiteRootFolder { get; set; }
 
-    public string StorageFolder { get; set; }
+    public string? StorageFolder { get; set; }
 }

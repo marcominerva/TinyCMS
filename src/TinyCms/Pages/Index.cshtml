@@ -2,39 +2,36 @@
 
 @model IndexModel
 @{
-    ViewData["Title"] = Model.ContentPage.Title;
-    ViewData["SiteTitle"] = Model.ContentPage.Site.Title;
-    ViewData["LogoUrl"]=Model.ContentPage.Site.LogoUrl;
-    ViewData["ShowLogoOnly"]=Model.ContentPage.Site.ShowLogoOnly;
+    ViewData["Title"] = Model.ContentPage?.Title;
+    ViewData["SiteTitle"] = Model.ContentPage?.Site.Title;
+    ViewData["LogoUrl"] = Model.ContentPage?.Site.LogoUrl;
+    ViewData["ShowLogoOnly"] = Model.ContentPage?.Site.ShowLogoOnly ?? false;
 }
 
 @section Head
 {
-    @if (Model.ContentPage.Site.StyleSheetUrls is not null)
+    @if (Model.ContentPage is not null)
     {
-        @foreach (var styleSheet in Model.ContentPage.Site.StyleSheetUrls)
+        @foreach (var styleSheet in Model.ContentPage.Site.StyleSheetUrls.EmptyIfNull())
         {
             <link rel="stylesheet" href="@styleSheet" asp-append-version="true" />
         }
-    }
 
-    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.Site.StyleSheetContent))
-    {
-        <raw><style type="text/css">@Model.ContentPage.Site.StyleSheetContent</style></raw>
-    }
+        @if (!string.IsNullOrWhiteSpace(Model.ContentPage.Site.StyleSheetContent))
+        {
+            <raw><style type="text/css">@Model.ContentPage.Site.StyleSheetContent</style></raw>
+        }
 
-    @if (Model.ContentPage.StyleSheetUrls is not null)
-    {
-        @foreach (var styleSheet in Model.ContentPage.StyleSheetUrls)
+        @foreach (var styleSheet in Model.ContentPage.StyleSheetUrls.EmptyIfNull())
         {
             <link rel="stylesheet" href="@styleSheet" asp-append-version="true" />
         }
-    }
 
-    @if(!string.IsNullOrWhiteSpace(Model.ContentPage.StyleSheetContent))
-    {
-        <raw><style type="text/css">@Model.ContentPage.StyleSheetContent</style></raw>
+        @if (!string.IsNullOrWhiteSpace(Model.ContentPage.StyleSheetContent))
+        {
+            <raw><style type="text/css">@Model.ContentPage.StyleSheetContent</style></raw>
+        }
     }
 }
 
-<raw>@Model.ContentPage.Content</raw>
+<raw>@Model.ContentPage?.Content</raw>

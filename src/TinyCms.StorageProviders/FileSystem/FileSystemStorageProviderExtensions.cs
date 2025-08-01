@@ -10,7 +10,7 @@ public static class FileSystemStorageProviderExtensions
         configuration.Invoke(settings);
 
         services.AddSingleton(settings);
-        services.AddScoped<IStorageProvider, FileSystemStorageProvider>();
+        services.AddSingleton<IStorageProvider, FileSystemStorageProvider>();
 
         return services;
     }

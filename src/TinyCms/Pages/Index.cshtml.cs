@@ -7,7 +7,7 @@ namespace TinyCms.Pages;
 
 public class IndexModel(IPageService pageService) : PageModel
 {
-    public ContentPage ContentPage { get; set; }
+    public ContentPage? ContentPage { get; set; }
 
     public async Task<IActionResult> OnGetAsync(string url)
     {

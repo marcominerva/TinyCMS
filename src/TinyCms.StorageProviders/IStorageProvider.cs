@@ -2,9 +2,9 @@
 
 public interface IStorageProvider
 {
-    Task<Stream> ReadAsStreamAsync(string path);
+    Task<Stream?> ReadAsStreamAsync(string path);
 
-    async Task<string> ReadAsStringAsync(string path)
+    async Task<string?> ReadAsStringAsync(string path)
     {
         using var input = await ReadAsStreamAsync(path);
         if (input is null)
