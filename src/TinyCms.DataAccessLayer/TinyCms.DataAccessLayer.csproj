@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.11.4" />
     <ProjectReference Include="..\TinyCms.Shared\TinyCms.Shared.csproj" />
   </ItemGroup>
 
