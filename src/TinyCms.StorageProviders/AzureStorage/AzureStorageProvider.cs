@@ -2,18 +2,11 @@
 
 namespace TinyCms.StorageProviders.AzureStorage;
 
-internal class AzureStorageProvider : IStorageProvider
+internal class AzureStorageProvider(AzureStorageSettings settings) : IStorageProvider
 {
-    private readonly BlobServiceClient blobServiceClient;
-    private readonly AzureStorageSettings settings;
+    private readonly BlobServiceClient blobServiceClient = new(settings.ConnectionString);
 
-    public AzureStorageProvider(AzureStorageSettings settings)
-    {
-        this.settings = settings;
-        blobServiceClient = new BlobServiceClient(settings.ConnectionString);
-    }
-
-    public async Task<Stream> ReadAsStreamAsync(string path)
+    public async Task<Stream?> ReadAsStreamAsync(string path)
     {
         var blobContainerClient = blobServiceClient.GetBlobContainerClient(settings.ContainerName);
         var blobClient = blobContainerClient.GetBlobClient(path);

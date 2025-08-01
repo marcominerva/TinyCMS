@@ -15,7 +15,7 @@ builder.Services.AddWebOptimizer(minifyCss: true, minifyJavaScript: builder.Envi
 
 builder.Services.AddSqlContext(options =>
 {
-    options.ConnectionString = builder.Configuration.GetConnectionString("SqlConnection");
+    options.ConnectionString = builder.Configuration.GetConnectionString("SqlConnection")!;
 });
 
 builder.Services.AddScoped<IPageService, PageService>();
@@ -28,7 +28,7 @@ if (azureStorageConnectionString.HasValue())
     builder.Services.AddAzureStorage(options =>
     {
         options.ConnectionString = azureStorageConnectionString;
-        options.ContainerName = appSettings.StorageFolder;
+        options.ContainerName = appSettings?.StorageFolder.GetValueOrDefault(string.Empty) ?? string.Empty;
     });
 }
 else
@@ -36,14 +36,15 @@ else
     builder.Services.AddFileSystemStorage(options =>
     {
         options.SiteRootFolder = builder.Environment.WebRootPath;
-        options.StorageFolder = appSettings.StorageFolder;
+        options.StorageFolder = appSettings?.StorageFolder.GetValueOrDefault("data") ?? "data";
     });
 }
 
 var app = builder.Build();
-app.UseHttpsRedirection();
 
 // Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -56,6 +57,7 @@ app.UseStatusCodePagesWithReExecute("/Index/{0}");
 
 app.UseWebOptimizer();
 app.UseStaticFiles();
+
 app.UseRouting();
 
 app.MapRazorPages();

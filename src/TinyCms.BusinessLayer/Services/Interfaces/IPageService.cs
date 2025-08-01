@@ -4,5 +4,5 @@ namespace TinyCms.BusinessLayer.Services.Interfaces;
 
 public interface IPageService
 {
-    Task<ContentPage> GetAsync(string url);
+    Task<ContentPage?> GetAsync(string url);
 }

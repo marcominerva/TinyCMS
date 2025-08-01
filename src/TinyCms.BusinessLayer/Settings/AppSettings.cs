@@ -4,5 +4,5 @@ public class AppSettings
 {
     public Guid SiteId { get; init; }
 
-    public string StorageFolder { get; set; }
+    public string? StorageFolder { get; set; }
 }

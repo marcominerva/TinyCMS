@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".github/copilot-instructions.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/TinyCms.BusinessLayer/TinyCms.BusinessLayer.csproj" />
+  <Project Path="src/TinyCms.DataAccessLayer/TinyCms.DataAccessLayer.csproj" />
+  <Project Path="src/TinyCms.Shared/TinyCms.Shared.csproj" />
+  <Project Path="src/TinyCms.StorageProviders/TinyCms.StorageProviders.csproj" />
+  <Project Path="src/TinyCms/TinyCms.csproj" />
+</Solution>

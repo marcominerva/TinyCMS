@@ -9,7 +9,7 @@ namespace TinyCms.BusinessLayer.Services;
 
 public class PageService(ISqlContext context, IStorageProvider storageProvider, IOptions<AppSettings> appSettingsOptions) : IPageService
 {
-    public async Task<ContentPage> GetAsync(string url)
+    public async Task<ContentPage?> GetAsync(string url)
     {
         url ??= "index";
         var query = """
