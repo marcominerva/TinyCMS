@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.477" />
-        <PackageReference Include="HtmlSanitizer" Version="9.0.889" />
+        <PackageReference Include="HtmlSanitizer" Version="9.0.892" />
         <PackageReference Include="Markdig" Version="0.44.0" />
         <PackageReference Include="TinyHelpers" Version="3.3.15" />
         <PackageReference Include="TinyHelpers.AspNetCore" Version="4.1.15" />
