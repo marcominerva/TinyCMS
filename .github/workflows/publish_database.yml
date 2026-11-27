@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  NET_VERSION: '10.x'
+  NET_VERSION: '11.x'
   DATABASE_PROJECT_FILE: database/TinyCms.Database.sqlproj
 
 jobs:
@@ -17,10 +17,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     
     - name: Setup .NET SDK ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.NET_VERSION }}
         dotnet-quality: 'ga'
