@@ -9,7 +9,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: tinycms
   AZURE_WEBAPP_PACKAGE_PATH: './published'
-  NET_VERSION: '10.x'
+  NET_VERSION: '11.x'
   PROJECT_NAME: src/TinyCms
   RUNTIME: win-x86
   
@@ -20,10 +20,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     
     - name: Setup .NET SDK ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.NET_VERSION }}
         dotnet-quality: 'ga'

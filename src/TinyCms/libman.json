@@ -3,19 +3,19 @@
     "defaultProvider": "cdnjs",
     "libraries": [
         {
-            "library": "twitter-bootstrap@5.3.8",
+            "library": "twitter-bootstrap@5.3.9",
             "destination": "wwwroot/lib/bootstrap"
         },
         {
-            "library": "bootstrap-icons@1.13.1",
+            "library": "bootstrap-icons@1.13.2",
             "destination": "wwwroot/lib/bootstrap-icons"
         },
         {
-            "library": "font-awesome@7.0.1",
+            "library": "font-awesome@7.3.1",
             "destination": "wwwroot/lib/fontawesome"
         },
         {
-            "library": "jquery@3.7.1",
+            "library": "jquery@4.1.0",
             "destination": "wwwroot/lib/jquery"
         }
     ]
